@@ -1,0 +1,26 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<!-- <setting name="aggressiveLazyLoading" value="false" /> -->
+	</settings>
+	<typeAliases>
+		<!--  批量别名定义
+			指定报名，mybatis自动扫描包中的po类，自动定义别名，别名就是类名（首字母大写或小写都可以）
+		 -->
+		<package name="com.humin.ssm.po" />
+		<!-- 针对单个别名定义
+			type：类型的路径
+			alias：别名
+		<typeAlias type="com.humin.ssm.po.DiurnalAcupoint" alias="diurnalAcupoint"/>
+		 -->
+	</typeAliases>
+	
+	
+	<mappers>
+		<!--  -->
+		<!-- <package name="com.humin.ssm.mapper" /> -->
+	</mappers>
+
+</configuration>

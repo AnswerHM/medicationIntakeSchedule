@@ -1,0 +1,120 @@
+body {
+	text-align: center;
+}
+
+h3 {
+	font-family: LiSu;
+	text-align: center;
+	font-size: 16px;
+	width: 58%;
+	margin: 15px auto 10px auto;
+}
+
+span.title,
+span.name {
+	font-size: 13px;
+	display: inline-block;
+}
+
+span.title {
+	font-family: SimSun;
+}
+
+span.name {
+	width: 90px;
+	border-bottom: 1px solid #666;
+	margin-right: 5px;
+	font-family: STKaiti;
+}
+span.name1 {
+	font-size: 13px;
+	display: inline-block;
+	width: 40px;
+	border-bottom: 1px solid #666;
+	margin-right: 5px;
+	font-family: STKaiti;
+}
+
+p.title {
+	font-size: 14px;
+	font-family: STKaiti;
+	text-align: center;
+	margin: 8px auto 2px auto
+}
+
+p.title>span {
+	border-bottom: 1px solid #666;
+	display: inline-block;
+	padding: 0 2px 0 0;
+}
+
+table {
+	color: #333;
+	width: 90%;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table thead {
+	font-family: STKaiti;
+	font-size: 14px;
+}
+
+table thead tr th,
+table tbody tr td,
+table tfoot tr td {
+	border: 1px solid #999;
+}
+
+table tr td {
+	font-size: 12px;
+	color: #333;
+	height: 22px;
+	font-family: SimSun;
+}
+
+table tr td.tip {
+	font-family: STKaiti;
+	font-size: 12px;
+	text-align: left;
+}
+
+p.tip {
+	font-size: 12px;
+	font-family: LiSu;
+	text-align: center;
+	margin: 0 auto;
+}
+
+span.descName {
+	font-family: STKaiti;
+	font-size: 12px;
+	text-align: center;
+}
+
+ul.desc {
+	margin: 0;
+}
+
+ul li {
+	font-family: STKaiti;
+	font-size: 12px;
+	text-align: left;
+	list-style: none;
+}
+
+ul li:not(:first-of-type) {
+	padding-left: 23px;
+}
+
+p.signature {
+	float: right;
+	text-align: center;
+}
+
+p.signature span{
+	font-family: STKaiti;
+	display: block;
+	font-size: 12px;
+}
+

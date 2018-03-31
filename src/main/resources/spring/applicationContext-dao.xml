@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/tx 
+      http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+		
+		<!-- 加载db.properties文件中的内容，db.properties文件中的key命名要有一定的特殊规则 -->
+		<context:property-placeholder location="classpath:db.properties"/>
+		
+		
+		<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
+			<property name="driverClass" value="${jdbc.driver}" />
+			<property name="jdbcUrl" value="${jdbc.url}" /> 
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="idleConnectionTestPeriod" value="60" />
+			<property name="idleMaxAge" value="240" />
+			<property name="maxConnectionsPerPartition" value="100" />
+			<property name="minConnectionsPerPartition" value="10" />
+			<property name="partitionCount" value="3" />
+			<property name="acquireIncrement" value="5" />
+			<property name="statementsCacheSize" value="100" />
+			<property name="releaseHelperThreads" value="3" />
+		</bean>
+		<!-- 配置数据源，dbcp -->
+		<!-- 
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="${jdbc.driver}" />
+			<property name="url" value="${jdbc.url}" /> 
+			<property name="username" value="${jdbc.username}" />
+			<property name="password" value="${jdbc.password}" />
+			<property name="maxActive" value="30" />
+			<property name="maxIdle" value="5" />
+		</bean> 
+		-->
+		
+		<!-- SqlSessionFactory -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	        <property name="dataSource" ref="dataSource"/>
+	        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"/>
+	        <property name="mapperLocations" value="classpath*:com/humin/ssm/mapper/*Mapper.xml"/>
+	    </bean>
+	    
+	    <!-- Mapper扫描器 -->
+	    <!-- -->
+	    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    	<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+	    	<property name="basePackage" value="com.humin.ssm.mapper"/>
+	    	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	    </bean>
+	    <!--  --> 
+</beans>		

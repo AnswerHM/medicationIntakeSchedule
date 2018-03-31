@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.humin.ssm.mapper.DiurnalAcupointMapper">
+	
+	<sql id="Base_Column_List">
+		id,dayChineseEra,hourChineseEra,firstAcupoint,secondAcupoint,thirdAcupoint,fourthAcupoint,fifthAcupoint
+	</sql>
+	
+	
+	<select id="queryAllDiurnalAcupointByMap" resultType="diurnalAcupoint" parameterType="map">
+		select
+			<include refid="Base_Column_List" />
+		from zd_diurnal_acupoint
+			<include refid="Query_Where_Clause" />
+    </select>
+    
+    
+	<sql id="Query_Where_Clause">
+		<where>
+			<if test="true">
+				1 = 1
+			</if>
+			<if test="id != null and id != ''">
+				and id = ${id}
+			</if>
+			<if test="dayChineseEra != null and dayChineseEra != ''">
+				and dayChineseEra = '${dayChineseEra}'
+			</if>
+			<if test="hourChineseEra != null and hourChineseEra != ''">
+				and hourChineseEra = '${hourChineseEra}'
+			</if>
+			<if test="firstAcupoint != null and firstAcupoint != ''">
+				and firstAcupoint = '${firstAcupoint}'
+			</if>
+			<if test="secondAcupoint != null and secondAcupoint != ''">
+				and secondAcupoint = '${secondAcupoint}'
+			</if>
+			<if test="thirdAcupoint != null and thirdAcupoint != ''">
+				and thirdAcupoint = '${thirdAcupoint}'
+			</if>
+			<if test="fourthAcupoint != null and fourthAcupoint != ''">
+				and fourthAcupoint = '${fourthAcupoint}'
+			</if>
+			<if test="fifthAcupoint != null and fifthAcupoint != ''">
+				and fifthAcupoint = '${fifthAcupoint}'
+			</if>
+		</where>
+	</sql>
+</mapper>
