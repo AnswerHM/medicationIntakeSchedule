@@ -257,7 +257,7 @@ public class LunarCalendar implements Serializable{
 	/**
 	 * 农历月份名
 	 */
-	private static final String[] LunarMonthName = { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二" };
+	private static final String[] LunarMonthName = { "正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "腊" };
 
 	/**
 	 * 农历日期名
@@ -488,6 +488,29 @@ public class LunarCalendar implements Serializable{
 			ret = null;
 			return ret;
 		}
+	}
+	
+	/**
+	 * 公历转农历
+	 * 
+	 * @param solarString
+	 * @return LunarCalendar
+	 */
+	public static LunarCalendar solar2Lunar(String solarString) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
+		String regex = "\\d{4}\\-\\d{2}\\-\\d{2} \\d{1}" ;
+		String regex2 = "\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}" ;
+		String regex3 = "\\d{4}\\-\\d{2}\\-\\d{2}" ;
+		if(!Pattern.matches(regex, solarString) && !Pattern.matches(regex2, solarString) && !Pattern.matches(regex3, solarString))
+		{
+			throw new Exception("请输入正确格式的年月日时： yyyy-MM-dd HH 或  yyyy-MM-dd H 或  yyyy-MM-dd") ;
+		}
+		int year = Integer.parseInt(solarString.substring(0, 4)) ;
+		int month = Integer.parseInt(solarString.substring(5, 7)) ;
+		int date = Integer.parseInt(solarString.substring(8, 10)) ;
+		Calendar solar = Calendar.getInstance() ;
+		solar.set(year, month-1, date) ;
+		return solar2Lunar(solar) ;
 	}
 
 	/**
@@ -728,7 +751,7 @@ public class LunarCalendar implements Serializable{
 		int date = solar.get(Calendar.DATE) ;
 		
 		int liChun = SolarTerms.getSolarTermNum(year, "lichun") ;
-		if(month < 2 && date < liChun)
+		if((month == 2 && date < liChun) || month < 2 )
 		{
 			year -= 1 ;
 		}
@@ -885,10 +908,6 @@ public class LunarCalendar implements Serializable{
 		return ("" + LunarGan[dateGanIndex] + LunarZhi[dateZhiIndex] + "日") ;
 	}
 	
-	/**
-	 * 根据时间计算时干支名称
-	 */
-	
 	
 
 	/**
@@ -918,7 +937,7 @@ public class LunarCalendar implements Serializable{
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");
 		String regex = "\\d{4}\\-\\d{2}\\-\\d{2} \\d{1}" ;
 		String regex2 = "\\d{4}\\-\\d{2}\\-\\d{2} \\d{2}" ;
-		if(!Pattern.matches(regex, dateString) || !Pattern.matches(regex2, dateString))
+		if(!Pattern.matches(regex, dateString) && !Pattern.matches(regex2, dateString))
 		{
 			throw new Exception("请输入正确格式的年月日时： yyyy-MM-dd HH 或  yyyy-MM-dd H") ;
 		}
@@ -938,7 +957,7 @@ public class LunarCalendar implements Serializable{
 		int liChun = SolarTerms.getSolarTermNum(year, "lichun") ;
 		int y = year ;
 		//立春之前计算为前一个年柱
-		if(month == 2 && date < liChun)
+		if((month == 2 && date < liChun) || month < 2)
 		{
 			y -= 1 ;
 		}
@@ -1055,7 +1074,7 @@ public class LunarCalendar implements Serializable{
 		//计算当年立春的日期
 		int liChun = SolarTerms.getSolarTermNum(year, "lichun") ;
 		int y = year ;
-		if(month == 2 && date < liChun)
+		if((month == 2 && date < liChun) || month < 2)
 		{
 			y -= 1 ;
 		}
